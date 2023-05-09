@@ -1,22 +1,19 @@
 import React, { VFC } from "react";
+import { useParams } from "react-router-dom";
 
-import movies from "../../../data/movies.json";
-import { Movie, RawMovie } from "../../../model";
-import { movieFactory } from "../../../utils/movie-factory";
+import { Movie } from "../../../model";
+import { useMovie } from "../../../store/hooks/use-movie";
 import { MovieDescription } from "./movie-description";
 
-const movieId = "330459";
-
 export const MoviePage: VFC = () => {
-  const movieData = movies.find((rawMovie) => rawMovie.id === Number(movieId));
+  const { movieId } = useParams<"movieId">();
+  const { movie } = useMovie(Number(movieId));
 
-  if (!movieData) {
+  if (!movie) {
     return <></>
   }
 
-  const movie: Movie = movieFactory(movieData as RawMovie);
-
   return (
-    <MovieDescription movie={movie} />
+    <MovieDescription movie={movie as Movie} />
   );
 };

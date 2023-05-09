@@ -1,13 +1,9 @@
-import React, { ChangeEvent, useCallback, useState, VFC } from "react";
+import React, { VFC } from "react";
 import { Box, Button, Flex, Heading, Input } from "@chakra-ui/react";
+import { useHeaderSearch } from "./use-header-search";
 
 export const HeaderSearch: VFC = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const onChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) =>
-      setSearchQuery(event.target.value),
-    []
-  );
+  const {searchQuery, onChange, onSubmit} = useHeaderSearch();
 
   return (
     <Box width="80%" marginX="auto">
@@ -20,7 +16,7 @@ export const HeaderSearch: VFC = () => {
         }}>
         Find your movie
       </Heading>
-      <Flex as="form" gap={4}>
+      <Flex as="form" gap={4} onSubmit={onSubmit}>
         <Input
           placeholder="What do you want to watch?"
           sx={{

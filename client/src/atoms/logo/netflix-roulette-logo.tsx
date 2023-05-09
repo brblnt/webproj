@@ -1,9 +1,11 @@
 import React, { VFC } from "react";
 import { Heading, HeadingProps, Link, Text } from "@chakra-ui/react";
+import { Link as NavLink } from "react-router-dom";
 
 export const NetflixRouletteLogo: VFC<HeadingProps> = (props) => (
   <Link
-    href="/"
+    as={NavLink}
+    to="/"
     _hover={{
       textDecoration: "none"
     }}
